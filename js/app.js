@@ -1,17 +1,21 @@
 let backgroundColor = [0, 0, 0];
 let column = 0;
 let row = 0;
+let widthVideo = 320;
+let heightVideo = 240;
 
 //! Code that runs on the beginning
 function setup() {
   // createCanvas(windowWidth, windowHeight);
-  createCanvas(320, 240);
+  createCanvas(widthVideo, heightVideo);
   background(backgroundColor);
   pixelDensity(1);
   video = createCapture(VIDEO);
-  video.size(320, 240);
+  video.size(widthVideo, heightVideo);
 }
 
+let marginFrame = widthVideo / 10;
+let sizeFrame = 10;
 
 function draw() {
   image(video, 0, 0, width, height);
@@ -27,13 +31,10 @@ function draw() {
       // pixels[index + 1] = 255;
       // pixels[index + 2] = 255;
       // pixels[index + 3] = 255;
-      let pos = (4 * 4);
+
       let index = (col + row * width) * 4;
-      if (col == pos) {
-        // pixels[pos * row] = 255;
-        // pixels[pos * row + 1] = 255;
-        // pixels[pos * row + 2] = 255;
-        // pixels[pos * row + 3] = 255;
+      if (col > marginFrame & col < marginFrame + sizeFrame ||
+        col > widthVideo - marginFrame - sizeFrame & col < widthVideo - marginFrame) {
         pixels[index] = 255;
         pixels[index + 1] = 255;
         pixels[index + 2] = 255;
