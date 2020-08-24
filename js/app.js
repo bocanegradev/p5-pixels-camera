@@ -16,7 +16,7 @@ function setup() {
 }
 
 //? Frame variables
-let marginFrame = widthVideo / 10;
+let marginFrame = widthVideo / 15;
 let sizeFrame = 10;
 
 function draw() {
@@ -25,23 +25,17 @@ function draw() {
   loadPixels();
   for (let row = 0; row < height; row++) {
     for (let col = 0; col < width; col++) {
-      // Rule to paint every single pixel (*4)
-      // let index = (col + row * width) * 4;
-      // let index = (col + row * width) * 32;
-      // pixels[index] = 255;
-      // pixels[index + 1] = 255;
-      // pixels[index + 2] = 255;
-      // pixels[index + 3] = 255;
       //? Every single pixel on the screen have 4 pixels for r + g + b + alpha
       let index = (col + row * width) * 4;
-      //? Left line
-      if (col > marginFrame & col < marginFrame + sizeFrame ||
-        //? Right line
-        col > widthVideo - marginFrame - sizeFrame & col < widthVideo - marginFrame ||
-        //? Top line
-        row > marginFrame & row < marginFrame + sizeFrame ||
-        //? Bottom line
-        row > heightVideo - marginFrame - sizeFrame & row < heightVideo - marginFrame) {
+      //? Left vertical line
+      if (col > marginFrame & col < marginFrame + sizeFrame & row > marginFrame & row < heightVideo - marginFrame ||
+        //? Right vertical line
+        col > widthVideo - marginFrame - sizeFrame & col < widthVideo - marginFrame & row > marginFrame & row < heightVideo - marginFrame ||
+        //? Top horizontal line
+        row > marginFrame & row < marginFrame + sizeFrame & col > marginFrame & col < widthVideo - marginFrame ||
+        //? Bottom horizontal line
+        row > heightVideo - marginFrame - sizeFrame & row < heightVideo - marginFrame & col > marginFrame & col < widthVideo - marginFrame
+      ) {
         pixels[index] = 255;
         pixels[index + 1] = 255;
         pixels[index + 2] = 255;
